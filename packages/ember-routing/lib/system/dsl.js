@@ -54,7 +54,7 @@ DSL.prototype = {
       createRoute(dsl, 'loading');
       createRoute(dsl, 'error', { path: dummyErrorRoute });
 
-      callback.call(dsl);
+      callback.apply(dsl, [dsl]);
 
       createRoute(this, name, options, dsl.generate());
     } else {
@@ -126,6 +126,6 @@ function createRoute(dsl, name, options, callback) {
 
 DSL.map = function(callback) {
   var dsl = new DSL();
-  callback.call(dsl);
+  callback.apply(dsl, [dsl]);
   return dsl;
 };
